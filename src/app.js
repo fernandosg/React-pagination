@@ -6,16 +6,42 @@ class ReactPagination extends React.Component{
   }
 }
 
-class ListItem extends React.Component{
+class Item extends React.Component{
   render(){
+    return(
+      <tr>
+        <td>{this.props.name}</td>
+        <td>{this.props.desc}</td>
+      </tr>
+    )
+  }
+}
+
+class ListItem extends React.Component{
+  constructor(){
+    super();
+    this.state={
+      items:[
+        {id:1,name:"This is the first element",desc:"This is the description of the first element"},
+        {id:2,name:"This is the second element",desc:"This is the description of the second element"},
+        {id:3,name:"This is the third element",desc:"This is the description of the third element"}
+      ]
+    }
+  }
+
+  _getItems(){
+    return this.state.items.map((item)=>{
+      return  (<Item key={item.id} name={item.name} desc={item.desc}/>)
+    })
+  }
+  render(){
+    let items=this._getItems();
     return(<table>
       <thead>
         <td>First attribute</td>
       </thead>
       <tbody>
-        <tr>
-          <td>First value</td>
-        </tr>
+        {items}
       </tbody>
       </table>)
   }
@@ -29,5 +55,5 @@ class TabsPage extends React.Component{
 
 ReactDOM.render(
   <ReactPagination />,
-  document.getElementById("story-app")
+  document.getElementById("app")
 );

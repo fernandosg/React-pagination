@@ -20465,18 +20465,63 @@ var ReactPagination = function (_React$Component) {
   return ReactPagination;
 }(React.Component);
 
-var ListItem = function (_React$Component2) {
-  _inherits(ListItem, _React$Component2);
+var Item = function (_React$Component2) {
+  _inherits(Item, _React$Component2);
+
+  function Item() {
+    _classCallCheck(this, Item);
+
+    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
+  }
+
+  _createClass(Item, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "tr",
+        null,
+        React.createElement(
+          "td",
+          null,
+          this.props.name
+        ),
+        React.createElement(
+          "td",
+          null,
+          this.props.desc
+        )
+      );
+    }
+  }]);
+
+  return Item;
+}(React.Component);
+
+var ListItem = function (_React$Component3) {
+  _inherits(ListItem, _React$Component3);
 
   function ListItem() {
     _classCallCheck(this, ListItem);
 
-    return _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).apply(this, arguments));
+    var _this3 = _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call(this));
+
+    _this3.state = {
+      items: [{ id: 1, name: "This is the first element", desc: "This is the description of the first element" }, { id: 2, name: "This is the second element", desc: "This is the description of the second element" }, { id: 3, name: "This is the third element", desc: "This is the description of the third element" }]
+    };
+    return _this3;
   }
 
   _createClass(ListItem, [{
+    key: "_getItems",
+    value: function _getItems() {
+      return this.state.items.map(function (item) {
+        return React.createElement(Item, { key: item.id, name: item.name, desc: item.desc });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var items = this._getItems();
       return React.createElement(
         "table",
         null,
@@ -20492,15 +20537,7 @@ var ListItem = function (_React$Component2) {
         React.createElement(
           "tbody",
           null,
-          React.createElement(
-            "tr",
-            null,
-            React.createElement(
-              "td",
-              null,
-              "First value"
-            )
-          )
+          items
         )
       );
     }
@@ -20509,8 +20546,8 @@ var ListItem = function (_React$Component2) {
   return ListItem;
 }(React.Component);
 
-var TabsPage = function (_React$Component3) {
-  _inherits(TabsPage, _React$Component3);
+var TabsPage = function (_React$Component4) {
+  _inherits(TabsPage, _React$Component4);
 
   function TabsPage() {
     _classCallCheck(this, TabsPage);
@@ -20536,6 +20573,6 @@ var TabsPage = function (_React$Component3) {
   return TabsPage;
 }(React.Component);
 
-ReactDOM.render(React.createElement(ReactPagination, null), document.getElementById("story-app"));
+ReactDOM.render(React.createElement(ReactPagination, null), document.getElementById("app"));
 
 },{"react":177,"react-dom":26}]},{},[178]);
