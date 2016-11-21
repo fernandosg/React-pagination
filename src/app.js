@@ -1,5 +1,6 @@
 var React=require("react");
 var ReactDOM = require('react-dom');
+var $=require("jquery");
 class ReactPagination extends React.Component{
   render(){
     return(<section><ListItem/><TabsPage /></section>)
