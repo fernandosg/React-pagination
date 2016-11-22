@@ -30670,16 +30670,82 @@ var ReactPagination = function (_React$Component) {
   function ReactPagination() {
     _classCallCheck(this, ReactPagination);
 
-    return _possibleConstructorReturn(this, (ReactPagination.__proto__ || Object.getPrototypeOf(ReactPagination)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (ReactPagination.__proto__ || Object.getPrototypeOf(ReactPagination)).call(this));
+
+    _this.state = {
+      items: [],
+      page: 1,
+      moreItems: false
+    };
+    return _this;
   }
 
   _createClass(ReactPagination, [{
+    key: "_getItemsFromServer",
+    value: function _getItemsFromServer() {
+      var parent = this;
+      /*
+      Possible way to get items from server (I NEED TO CREATE A BASIC API)
+      $.ajax({
+      method:"GET",
+      url:parent.props.url,
+      success:(response)=>{
+      parent.setState({moreItems:response.moreItems});
+      parent.setState({items:response.items});
+      }
+      })
+      */
+      this.setState({ items: [{ id: 1, name: "This is the first element", desc: "This is the description of the first element" }, { id: 2, name: "This is the second element", desc: "This is the description of the second element" }, { id: 3, name: "This is the third element", desc: "This is the description of the third element" }] });
+    }
+  }, {
+    key: "_nextItemsFromServer",
+    value: function _nextItemsFromServer() {
+      //Possible way to get the next page of items from server (I NEED TO CREATE A BASIC API)
+      /*
+      if(this.state.moreItems){
+        this.setState({page:this.state.page+1});
+        $.ajax({
+          method:"GET",
+          url:parent.props.url,
+          data:{page:this.state.page},
+          success:(response)=>{
+            parent.setState({moreItems:response.moreItems});
+            parent.setState({items:response.items})
+          }
+        })
+      }
+      */
+    }
+  }, {
+    key: "_previousItemsFromServer",
+    value: function _previousItemsFromServer() {
+      /*Possible way to get the next page of items from server (I NEED TO CREATE A BASIC API)
+      if(this.state.page>2){
+        this.setState({page:this.state.page-1});
+        $.ajax({
+          method:"GET",
+          url:parent.props.url,
+          data:{page:this.state.page},
+          success:(response)=>{
+            parent.setState({moreItems:response.moreItems});
+            parent.setState({items:response.items})
+          }
+        })
+      }
+      */
+    }
+  }, {
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      this._getItemsFromServer();
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "section",
         null,
-        React.createElement(ListItem, null),
+        React.createElement(ListItem, { items: this.state.items }),
         React.createElement(TabsPage, null)
       );
     }
@@ -30726,17 +30792,17 @@ var ListItem = function (_React$Component3) {
   function ListItem() {
     _classCallCheck(this, ListItem);
 
-    var _this3 = _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call(this));
-
-    _this3.state = {
-      items: [{ id: 1, name: "This is the first element", desc: "This is the description of the first element" }, { id: 2, name: "This is the second element", desc: "This is the description of the second element" }, { id: 3, name: "This is the third element", desc: "This is the description of the third element" }]
-    };
-    return _this3;
+    return _possibleConstructorReturn(this, (ListItem.__proto__ || Object.getPrototypeOf(ListItem)).call(this));
   }
 
   _createClass(ListItem, [{
     key: "_getItems",
     value: function _getItems() {
+      var listItems = this.props.items;
+      this.state = {
+        moreItems: false,
+        items: listItems
+      };
       return this.state.items.map(function (item) {
         return React.createElement(Item, { key: item.id, name: item.name, desc: item.desc });
       });
