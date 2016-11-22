@@ -1,7 +1,7 @@
 {
-  "name": "react-course",
+  "name": "react-pagination",
   "version": "1.0.0",
-  "description": "A personal repository for a course of reactjs",
+  "description": "A simple pagination component in React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
